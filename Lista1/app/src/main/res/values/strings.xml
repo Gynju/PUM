@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">GeoQuiz</string>
+
+    <string name="question_stolica_polski">Czy Warszawa jest stolicą Polski?</string>
+    <string name="question_stolica_dolnego_slaska">Czy Świdnica jest stolicą Dolnego Śląska?</string>
+    <string name="question_wisla">Czy Wisła jest najdłuższą rzeką \n Polski?</string>
+    <string name="question_sniezka">Czy Śnieżka to najwyższy szczyt \n Karkonoszy?</string>
+
+
+    <string name="true_button">Prawda</string>
+    <string name="false_button">Fałsz</string>
+    <string name="next_button">Następne</string>
+    <string name="back_button">Poprzednie</string>
+
+    <string name="correct_toast">Odpowiedź poprawna!</string>
+    <string name="incorrect_toast">Odpowiedź błędna!</string>
+
+</resources>
