@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\0f501ac4a6013d4da5125f9679148ca2f22c5e38\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="aee64634871d88a419d59eb743c1258a60f19700">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_d9ac38074f64262d291e070d7b631296d7451aba.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\e5e280662027f47e29c65223ac91d6cf82b4cbf8\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="0a0ef86b7fa568a52bf6214a0326ca1f1d618da7">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_19acb7a70e2390046ca95d4874327df16af6e597.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\f87f7d5885cfbdc53b37fdd2b0488a020b0d12be\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_4d55f7384423e7c93862b4f6e01bd53b2b11c2ba.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\f61389a99df9b62a84f573e32f48d174c8b5772d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="fef2b3e4b6b1b0e5fe7b69fa137a5fa55a3182ab">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_7b1c80f9a242d8d5297f9e588beecfaa4683ff19.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\ec613b5b1437527f1ad0634157295d288180f9ff\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="8e673cdfadd8f2d98fdb2fda2285c30f6e449782">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_405138e5769b82dff72421fb9916a121c6e3611f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\b60100fbfd95142d7ea81d831ae2cc851df898a9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="e79aa3d9a16f8c9f16377c0608de70a8f31e5d80">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_09147f99f0aec36a6b78f6023b6131c3bf9e464a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\7019123c6e794c537b16da44a6314f12c265b528\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="ca3c7aa31e2726a400a6e552b93cb9f63c9a1e6d">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_f9e059fbd768fafc5cff334424b308dd8f3a0614.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.1.0\support-annotations-25.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="64cb6b229a8bdfd907bc8dd46839a0053e4c018d">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\support-annotations-25.1.0_d931c674882a765cc112536e90af341922e5008a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\e6e0c0c7e2ed18f58d70157d17d0eab11675c31e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="2a53c4f3518116b8c6aee0e477233f0f7da8616f">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_9347b54ddcee8cdf74c403ff45281103b5e1206c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\7d091a2becb3554cf54b31cccdce400389c1e1b7\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="6fb6ac3e8d3b9013819920d9ea11f3803c4c0033">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_c4ee2c2c209a6a98ed1e75da51c8973c25d8a8a8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\460c89353ce28c1e15feb0b1518953cf36978ede\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1630658fbc2d222b988603c27b4a4249586fbfe7">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_8bb1dba6388ff91d67c4440a13c9ea8e791ef4c1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\51c26c0e8a1296974fd66e6eabd52e7fa662a873\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="65d086ee9daaf87b5af62ad24471edafa433354c">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_1fe25598030584693374c15c47e5cae46d610ab2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Gynju\.android\build-cache\63fc7c7e917be824a6a9c48b8abb7fbb03075a41\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.2"
+        sha1="f02263e35e52668dd17b73bf961437e3d562b35f">
+        <dex dex="C:\Users\Gynju\Documents\Studia\Semestr5\PUM\Listy\Lista1\app\build\intermediates\pre-dexed\debug\classes_7f7a0809b79eee7d3dcf94fc7b3d66811d2c15d6.jar" />
+    </item>
+
+</items>
