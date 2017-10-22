@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+xmlns stands for xml name space
+Each declare a different XML namespace (android, app, and tools, respectively)
+If your XML file has one or more attributes prefixed with android:,
+you need to declare the android namespace. Many XML files will have these,
+from framework-defined runtime attributes.
+.-->
+
+<!--
+android:gravity is the Inside gravity of that View.
+This means, in which direction it's contents should align.
+-->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:id="@+id/main_layout"
+    android:weightSum="1">
+
+
+    <!--
+    Any View object may have an integer ID associated with it,
+    to uniquely identify the View within the tree. When the application
+    is compiled, this ID is referenced as an integer, but the ID is
+    typically assigned in the layout XML file as a string, in the id
+    attribute. This is an XML attribute common to all View objects
+    (defined by the View class) and you will use it very often.
+    -->
+
+    <!--
+    Then create an instance of the view object and capture it
+    from the layout (typically in the onCreate() method):
+
+    Button myButton = (Button) findViewById(R.id.my_button);
+
+    Defining IDs for view objects is important when creating a RelativeLayout.
+    In a relative layout, sibling views can define their layout relative to
+    another sibling view, which is referenced by the unique ID.
+
+    An ID need not be unique throughout the entire tree,
+    but it should be unique within the part of the tree
+    you are searching (which may often be the entire tree,
+    so it's best to be completely unique when possible).
+    -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="24dp"
+        android:id="@+id/answered_text_view" />
+
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="24dp"
+    android:id="@+id/question_text_view" />
+
+
+        <!--
+        see:
+        https://developer.android.com/guide/topics/resources/more-resources.html#Dimension
+        for padding units
+        -->
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!--
+        LinearLayout also supports assigning a weight to individual children
+        with the android:layout_weight attribute. This attribute assigns an
+        "importance" value to a view in terms of how much space it should occupy
+        on the screen. A larger weight value allows it to expand to fill any
+        remaining space in the parent view. Child views can specify a weight value,
+        and then any remaining space in the view group is assigned to children in
+        the proportion of their declared weight. Default weight is zero.
+
+        For example, if there are three text fields and two of them declare a weight
+        of 1, while the other is given no weight, the third text field without weight
+        will not grow and will only occupy the area required by its content.
+        The other two will expand equally to fill the space remaining after all three
+        fields are measured. If the third field is then given a weight of 2 (instead of 0),
+        then it is now declared more important than both the others, so it gets half
+        the total remaining space, while the first two share the rest equally.
+        -->
+        <ImageButton
+            android:text="@string/false_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/false_button"
+            android:src="@drawable/no"
+            android:layout_weight="1" />
+        <ImageButton
+            android:text="@string/true_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/true_button"
+            android:src="@drawable/yes"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:text="@string/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/arrow_left"
+            android:drawablePadding="6dp"
+            android:src="@drawable/back"
+            android:layout_weight="2" />
+
+        <ImageButton
+            android:id="@+id/next_button"
+            android:text="@string/next_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableRight="@drawable/arrow_right"
+            android:drawablePadding="6dp"
+            android:src="@drawable/next"
+            android:layout_weight="2" />
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
