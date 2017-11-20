@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="1f758d6e3a341b709394c40a1a7a30be2f11c9e3">
+        <dex dex="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_53c497fd2f25316ad172ef7038221ceaefe2c03a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_156d0d715b8820b47d2fb5da378d3fc487603efd\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Gynju\.android\build-cache\e16f2bd98ac55166ce34f02349b4a041e4643ed6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b266c8faa5af72e579b9da36ef35053ffed6ac64">
+        <dex dex="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_bdb524dbc96bccb38a8f43138c102aa2ba9eda9d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Gynju\AppData\Local\Android\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_cdecd81c07547b71895eab298648eebeaca82951\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Gynju\.android\build-cache\4029b6f32710dbde288bedb16db224da29571eae\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.2"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="C:\Users\Gynju\Documents\GitHub\PUM\Lista5\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0e3e5f7019172389528ed50a5c5003197f87b822\classes.dex" />
+    </item>
+
+</items>

@@ -17,33 +17,29 @@ import java.util.List;
 public class QuestionListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private QuestionAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questionlist);
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setHasFixedSize(true);
-
-        mLayoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
 
         QuestionBank mQuestionsBank = QuestionBank.getInstance();
         mAdapter = new QuestionAdapter(mQuestionsBank.getQuestions());
         mRecyclerView.setAdapter(mAdapter);
     }
+
     private class QuestionHolder extends RecyclerView.ViewHolder
     {
         private TextView mQuestionTextView;
-
         private Question mQuestion;
 
         public QuestionHolder(LayoutInflater inflater, ViewGroup parent)
         {
             super(inflater.inflate(R.layout.activity_questionlist,parent,false));
-
             mQuestionTextView = (TextView) itemView.findViewById(R.id.questionList);
 
         }
@@ -60,17 +56,20 @@ public class QuestionListActivity extends AppCompatActivity {
         {
             mQuestions = questions;
         }
-        @Override
-        public void onBindViewHolder(QuestionHolder holder, int position) {
-            Question question = mQuestions.get(position);
-            holder.bind(question);
-        }
+
         @Override
         public QuestionHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(QuestionListActivity.this);
             return new QuestionHolder(layoutInflater,parent);
 
         }
+
+        @Override
+        public void onBindViewHolder(QuestionHolder holder, int position) {
+            Question question = mQuestions.get(position);
+            holder.bind(question);
+        }
+
         @Override
         public int getItemCount() {return mQuestions.size();}
     }
