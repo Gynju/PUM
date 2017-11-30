@@ -43,14 +43,10 @@ public class QuizActivity extends AppCompatActivity {
     private int mScore = 0;
     private int mCheatTokens = 3;
     private int mAnsweredQuestions = 0;
-    private int[] mLockedQuestions = {-1, -1, -1, -1};
 
-    private boolean[] mIsCheater = {false, false, false, false};
+    private boolean[] mLockedQuestions;
+    private boolean[] mIsCheater;
 
-    //    Bundles are generally used for passing data between various Android activities.
-    //    It depends on you what type of values you want to pass, but bundles can hold all
-    //    types of values and pass them to the new activity.
-    //    see: https://stackoverflow.com/questions/4999991/what-is-a-bundle-in-an-android-application
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,28 +58,19 @@ public class QuizActivity extends AppCompatActivity {
 
         // check for saved data
         if (savedInstanceState != null) {
-            mCheatTokens = savedInstanceState.getInt(TOKEN);
+            mScore = savedInstanceState.getInt("score");
+            mAnsweredQuestions = savedInstanceState.getInt("answeredQuestions");
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
-            Log.i(TAG, String.format("onCreate(): Restoring saved index: %d", mCurrentIndex));
-
-            // here in addition we are restoring our Question array;
-            // getParcelableArray returns object of type Parcelable[]
-            // since our Question is implementing this interface (Parcelable)
-            // we are allowed to cast the Parcelable[] to desired type which
-            // is the Question[] here.
-           // mQuestionsBank = savedInstanceState.getParcelable(KEY_QUESTIONS);
-            // sanity check
-            if (mQuestionsBank == null)
-            {
-                Log.e(TAG, "Question bank array was not correctly returned from Bundle");
-
-            } else {
-                Log.i(TAG, "Question bank array was correctly returned from Bundle");
-            }
-
+            mCheatTokens = savedInstanceState.getInt(TOKEN);
+            mIsCheater = savedInstanceState.getBooleanArray("isCheater");
+            mLockedQuestions = savedInstanceState.getBooleanArray("lockedQuestions");
+        } else {
+            mQuestionsBank.setQuestions();
+            mIsCheater = new boolean[mQuestionsBank.size()];
+            mLockedQuestions = new boolean[mQuestionsBank.size()];
+            mIsCheater = initArray(mIsCheater, false);
+            mLockedQuestions = initArray(mLockedQuestions, false);
         }
-
-        mQuestionsBank.setQuestions();
 
         mApiLevelTextView = (TextView) findViewById(R.id.api_level_text_view);
         mApiLevelTextView.setText("Android version: " + androidOS);
@@ -98,8 +85,6 @@ public class QuizActivity extends AppCompatActivity {
                 startActivityForResult(intent, CHEAT_REQEST_CODE);
             }
         });
-
-        Log.i(TAG, String.format("Tyle jest teraz tokenów: %d", mCheatTokens));
 
         if(mCheatTokens <= 0)
         {
@@ -209,24 +194,30 @@ public class QuizActivity extends AppCompatActivity {
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
-        Log.i(TAG, String.format("onSaveInstanceState: current index %d ", mCurrentIndex) );
-        Log.i(TAG, String.format("onSaveInstanceState: current tokens %d ", mCheatTokens) );
 
+        savedInstanceState.putInt("answeredQuestions", mScore);
+        savedInstanceState.putInt("score", mAnsweredQuestions);
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
         savedInstanceState.putInt(TOKEN, mCheatTokens);
-        //savedInstanceState.putParcelable(KEY_QUESTIONS, mQuestionsBank);
         savedInstanceState.putBooleanArray("isCheater", mIsCheater);
+        savedInstanceState.putBooleanArray("lockedQuestions", mLockedQuestions);
     }
 
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
+
+        mScore = savedInstanceState.getInt("score");
+        mAnsweredQuestions = savedInstanceState.getInt("answeredQuestions");
+        mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
+        mCheatTokens = savedInstanceState.getInt(TOKEN);
         mIsCheater = savedInstanceState.getBooleanArray("isCheater");
-        mCheatTokens = savedInstanceState.getInt("currentTokens");
-        //mQuestionsBank = savedInstanceState.getParcelable(KEY_QUESTIONS);
+        mLockedQuestions = savedInstanceState.getBooleanArray("lockedQuestions");
+
+
     }
 
     private void checkScore() {
-        if (mAnsweredQuestions == 4) {
+        if (mAnsweredQuestions == mQuestionsBank.size()) {
             String tText =  getString(R.string.answered_questions)+" "+mScore;
             Toast toast = Toast.makeText(this, (tText), Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.BOTTOM,0,0);
@@ -235,7 +226,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void updateQuestion() {
-        if (!(mLockedQuestions[mCurrentIndex] == mCurrentIndex)) {
+        if (!(mLockedQuestions[mCurrentIndex] == true)) {
             mTrueButton.setVisibility(View.VISIBLE);
             mFalseButton.setVisibility(View.VISIBLE);
             mAnsweredTextView.setText("");
@@ -253,7 +244,7 @@ public class QuizActivity extends AppCompatActivity {
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionsBank.getQuestion(mCurrentIndex).isAnswerTrue();
 
-        mLockedQuestions[mCurrentIndex] = mCurrentIndex;
+        mLockedQuestions[mCurrentIndex] = true;
         mTrueButton.setVisibility(View.GONE);
         mFalseButton.setVisibility(View.GONE);
         int toastMessageId = 0;
@@ -272,4 +263,12 @@ public class QuizActivity extends AppCompatActivity {
 
         checkScore();
     }
+
+    private boolean[] initArray(boolean[] arrayToInit, boolean initValue) {
+        for(int i = 0; i < arrayToInit.length; i++) {
+            arrayToInit[i] = initValue;
+        }
+        return arrayToInit;
+    }
 }
+

@@ -39,5 +39,7 @@ class QuestionBank{
         mQuestionList.add(new Question(R.string.question_stolica_dolnego_slaska, false));
         mQuestionList.add(new Question(R.string.question_sniezka, true));
         mQuestionList.add(new Question(R.string.question_wisla, true));
+        mQuestionList.add(new Question(R.string.question_polska, false));
     }
+
 }
