@@ -27,4 +27,21 @@
         android:text="@string/remaining_tokens_label"
         android:gravity="center"/>
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Take Photo"
+        android:id="@+id/button_photo"
+        />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:background="@color/colorPrimary" />
+
+
 </LinearLayout>

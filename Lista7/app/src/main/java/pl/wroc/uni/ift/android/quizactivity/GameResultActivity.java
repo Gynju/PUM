@@ -2,13 +2,16 @@ package pl.wroc.uni.ift.android.quizactivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -18,6 +21,7 @@ import android.widget.TextView;
 public class GameResultActivity extends AppCompatActivity {
 
     //ZMIENNE
+    static final int REQUEST_IMAGE_CAPTURE = 1;
     private final static String EXTRA_KEY_ANSWERS = "Answers";
     private final static String EXTRA_KEY_QUESTIONS = "Questions";
     private final static String EXTRA_KEY_TOKENS= "Tokens";
@@ -29,6 +33,9 @@ public class GameResultActivity extends AppCompatActivity {
     TextView mTextViewQuestions;
     TextView mTextViewAnswers;
     TextView mTextViewATokens;
+
+    ImageView mImageView;
+    Button mButton;
 
     //FUNKCJE
     protected void onSaveInstanceState(Bundle savedInstanceState) {
@@ -55,6 +62,16 @@ public class GameResultActivity extends AppCompatActivity {
         mTextViewQuestions = (TextView) findViewById(R.id.text_questions_quantity);
         mTextViewAnswers = (TextView) findViewById(R.id.text_answered_questions);
         mTextViewATokens = (TextView) findViewById(R.id.text_remaining_tokens);
+
+        mButton = (Button) findViewById(R.id.button_photo);
+        mImageView = (ImageView) findViewById(R.id.image_view);
+
+        mButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                takeAPhotoIntent();
+            }
+        });
 
         String tText =  getResources().getString(R.string.questions_quantity_label) + " " + mAnswers;
         mTextViewQuestions.setText(tText);
@@ -101,5 +118,22 @@ public class GameResultActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            mImageView.setImageBitmap(imageBitmap);
+        }
+    }
+
+    private void takeAPhotoIntent() {
+        Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (takePicture.resolveActivity(getPackageManager())!=null) {
+            startActivityForResult(takePicture, REQUEST_IMAGE_CAPTURE);
+        }
+
     }
 }

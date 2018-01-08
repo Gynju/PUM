@@ -32,6 +32,11 @@ class QuestionBank{
         return mQuestionList.get(index);
     }
 
+    public void addQuestion(String str, boolean answer){
+        mQuestionList.add(new Question(R.string.new_question, answer));
+        mQuestionList.get(mQuestionList.size()-1).setText(str);
+    }
+
     public List<Question> getQuestions() {
         return mQuestionList;
     }

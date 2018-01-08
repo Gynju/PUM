@@ -8,12 +8,14 @@ import android.os.Parcelable;
 public class Question implements Parcelable {
 
     private int mTextResId;
+    private String mText;
     private boolean mAnswerTrue;
 
     public Question(int textResId, boolean answerTrue)    {
 
-        mTextResId=textResId;
+        mTextResId = textResId;
         mAnswerTrue = answerTrue;
+        //setText("NULL");
     }
 
     // Required methods from Parcelable interface
@@ -69,6 +71,14 @@ public class Question implements Parcelable {
 
     public int getTextResId() {
         return mTextResId;
+    }
+
+    public void setText(String text) {
+        mText = text;
+    }
+
+    public String getText() {
+        return mText;
     }
 
     public void setTextResId(int textResId) {

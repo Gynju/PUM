@@ -20,6 +20,7 @@ public class QuizFragment extends Fragment {
     public static final String KEY_INDEX = "index";
     public static final String TOKEN = "currentTokens";
     public static final String ARG_QUESTION_ID = "question_id";
+    public static final String ARG_QUESTION_TEXT = "question_text";
     public static final String ARG_QUESTION_POSITION = "question_position";
     public static final int CHEAT_REQEST_CODE = 0;
 
@@ -27,8 +28,6 @@ public class QuizFragment extends Fragment {
 
     public ImageButton mTrueButton;
     public ImageButton mFalseButton;
-    public ImageButton mNextButton;
-    public ImageButton mBackButton;
     public Button mCheatButton;
     public Button mQuestionsListButton;
 
@@ -41,12 +40,14 @@ public class QuizFragment extends Fragment {
 
     public int mCurrentIndex;
     private int mQuestionId;
+    public String mQuestionText;
 
-    public static QuizFragment newInstance(int id, int position)
+    public static QuizFragment newInstance(int id, int position, String text)
     {
         Bundle args = new Bundle();
         args.putSerializable(ARG_QUESTION_ID, id);
         args.putSerializable(ARG_QUESTION_POSITION, position);
+        args.putString(ARG_QUESTION_TEXT, text);
         QuizFragment fragment = new QuizFragment();
         fragment.setArguments(args);
         return fragment;
@@ -61,6 +62,7 @@ public class QuizFragment extends Fragment {
         }
         mQuestionId = (int) getArguments().getSerializable(ARG_QUESTION_ID);
         mCurrentIndex = (int) getArguments().getSerializable(ARG_QUESTION_POSITION);
+        mQuestionText = getArguments().getString(ARG_QUESTION_TEXT);
     }
 
     @Override
@@ -91,13 +93,6 @@ public class QuizFragment extends Fragment {
 
         mAnsweredTextView = (TextView) v.findViewById(R.id.answered_text_view);
         mQuestionTextView = (TextView) v.findViewById(R.id.question_text_view);
-        mQuestionTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCurrentIndex = (mCurrentIndex + 1) % mQuestionsBank.size();
-                updateQuestion();
-            }
-        });
 
         mTrueButton = (ImageButton) v.findViewById(R.id.true_button);
         mTrueButton.setOnClickListener(
@@ -114,31 +109,6 @@ public class QuizFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 checkAnswer(false);
-            }
-        });
-
-        mNextButton = (ImageButton) v.findViewById(R.id.next_button);
-        mNextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCurrentIndex = mCurrentIndex + 1;
-                if (mCurrentIndex >= mQuestionsBank.size()) {
-                    mCurrentIndex = 0;
-
-                }
-                updateQuestion();
-            }
-        });
-
-        mBackButton = (ImageButton) v.findViewById(R.id.back_button);
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mCurrentIndex = mCurrentIndex - 1;
-                if (mCurrentIndex < 0) {
-                    mCurrentIndex = mQuestionsBank.size()-1;
-                }
-                updateQuestion();
             }
         });
 
@@ -175,8 +145,6 @@ public class QuizFragment extends Fragment {
                         ((QuizPager)getActivity()).reduceCheatTokens();
                         if(((QuizPager)getActivity()).getCheatTokens() <= 0)
                         {
-                            //mTokensTextView = (TextView) findViewById(R.id.cheat_used_all_tokens);
-                            //mTokensTextView.setText(R.string.used_all_tokens);
                             mCheatButton.setVisibility(View.GONE);
                         }
                     }
@@ -196,10 +164,6 @@ public class QuizFragment extends Fragment {
         if (((QuizPager)getActivity()).getAnsweredQuestions() >= mQuestionsBank.size()) {
             Intent intent = GameResultActivity.newIntent(getActivity(), mQuestionsBank.size(), ((QuizPager)getActivity()).getScore(), ((QuizPager)getActivity()).getCheatTokens());
             startActivity(intent);
-            //String tText =  getString(R.string.answered_questions)+" "+mScore;
-            //Toast toast = Toast.makeText(getActivity(), (tText), Toast.LENGTH_SHORT);
-            //toast.setGravity(Gravity.BOTTOM,0,0);
-            //toast.show();
         }
     }
 
@@ -216,15 +180,22 @@ public class QuizFragment extends Fragment {
         }
 
         int question = mQuestionId; //mQuestionsBank.getQuestion(mCurrentIndex).getTextResId();
-        mQuestionTextView.setText(question);
+        if(question == R.string.new_question)
+            mQuestionTextView.setText(mQuestionText);
+        else
+            mQuestionTextView.setText(question);
     }
 
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionsBank.getQuestion(mCurrentIndex).isAnswerTrue();
 
         ((QuizPager)getActivity()).setQuestionStatus(true, mCurrentIndex);
-        mTrueButton.setVisibility(View.GONE);
-        mFalseButton.setVisibility(View.GONE);
+        mTrueButton.setEnabled(false);//setVisibility(View.GONE);
+        mFalseButton.setEnabled(false);//setVisibility(View.GONE);
+        if(userPressedTrue)
+            mFalseButton.setAlpha(.3f);
+        else
+            mTrueButton.setAlpha(.3f);
         int toastMessageId = 0;
 
         if (userPressedTrue == answerIsTrue) {

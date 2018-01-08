@@ -28,8 +28,6 @@ public class QuestionListFragment extends Fragment {
     private QuestionAdapter mAdapter;
     public QuestionBank mQuestionsBank = QuestionBank.getInstance();
     private int adapterIndex;
-    private boolean mSubtitleVisible;
-    EditText editText;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,19 +46,6 @@ public class QuestionListFragment extends Fragment {
         mAdapter = new QuestionAdapter(mQuestionsBank.getQuestions());
         mRecyclerView.setAdapter(mAdapter);
 
-//        editText = (EditText)view.findViewById(R.id.EDITTEXT);
-//        editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction (TextView textView,int i, KeyEvent keyEvent){
-//                boolean handled = false;
-//                if (i == EditorInfo.IME_ACTION_NEXT) {
-//                    String str = textView.getText().toString();
-//                    Toast.makeText(getActivity(), "WPISANA NAZWA: " + str, Toast.LENGTH_LONG).show();
-//                }
-//                return handled;
-//            }
-//        });
-
         return view;
     }
 
@@ -78,7 +63,12 @@ public class QuestionListFragment extends Fragment {
 
         public void bind(Question question) {
             mQuestion = question;
-            mQuestionTextView.setText(mQuestion.getTextResId());
+            if(mQuestion.getTextResId() == R.string.new_question) {
+                mQuestionTextView.setText(mQuestion.getText());
+            }
+            else {
+                mQuestionTextView.setText(mQuestion.getTextResId());
+            }
         }
 
         public void onClick(View view) {
@@ -127,7 +117,8 @@ public class QuestionListFragment extends Fragment {
 
         switch (item.getItemId()) {
             case R.id.new_question:
-                mQuestionsBank.setQuestions();
+                Intent intent = AddQuestionActivity.newIntent(getActivity());
+                startActivity(intent);
                 return true;
             case R.id.quit:
                 System.exit(0);
@@ -135,5 +126,10 @@ public class QuestionListFragment extends Fragment {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void updateList() {
+        mAdapter = new QuestionAdapter(mQuestionsBank.getQuestions());
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

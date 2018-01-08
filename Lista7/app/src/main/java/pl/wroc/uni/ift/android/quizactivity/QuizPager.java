@@ -15,7 +15,7 @@ import java.util.List;
 
 public class QuizPager extends FragmentActivity {
 
-    List<Question> mQuestions;
+    public QuestionBank mQuestions;
     private ViewPager mPager;
     private PagerAdapter mPagerAdapter;
     private int mIndex;
@@ -37,7 +37,7 @@ public class QuizPager extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_pager);
 
-        mQuestions = QuestionBank.getInstance().getQuestions();
+        mQuestions = QuestionBank.getInstance();
 
         mLockedQuestions = new boolean[mQuestions.size()];
         mLockedQuestions = initArray(mLockedQuestions, false);
@@ -59,7 +59,7 @@ public class QuizPager extends FragmentActivity {
 
         @Override
         public  Fragment getItem(int position) {
-            return QuizFragment.newInstance(mQuestions.get(position).getTextResId(), position);
+            return QuizFragment.newInstance(mQuestions.getQuestions().get(position).getTextResId(), position, mQuestions.getQuestions().get(position).getText());
         }
         @Override
         public int getCount() {
