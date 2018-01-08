@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
@@ -67,5 +70,36 @@ public class GameResultActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_KEY_QUESTIONS, answeredQuestions);
         intent.putExtra(EXTRA_KEY_TOKENS, remainingTokens);
         return intent;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_game_result,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.back:
+                Intent intent = new Intent(GameResultActivity.this,QuestionListActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.share:
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Asked questions: "+ mAnswers + "\n" + "Answered questions: "+ mQuestions + "\n" + "Remaining cheat Tokens: "+ mTokens);
+
+                startActivity(Intent.createChooser(shareIntent, "Share"));
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

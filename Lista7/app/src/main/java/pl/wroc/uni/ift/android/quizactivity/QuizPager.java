@@ -21,6 +21,10 @@ public class QuizPager extends FragmentActivity {
     private int mIndex;
     private int mAnsweredQuestions;
     private int mCheatTokens = 3;
+    private int mScore = 0;
+    private boolean[] mLockedQuestions;
+    private boolean[] mIsCheater;
+
     private static final String EXTRA_CURRENT_ID = "question_id";
 
     public static Intent newIntent(Context packageContext, int index) {
@@ -34,6 +38,11 @@ public class QuizPager extends FragmentActivity {
         setContentView(R.layout.quiz_pager);
 
         mQuestions = QuestionBank.getInstance().getQuestions();
+
+        mLockedQuestions = new boolean[mQuestions.size()];
+        mLockedQuestions = initArray(mLockedQuestions, false);
+        mIsCheater = new boolean[mQuestions.size()];
+        mIsCheater = initArray(mIsCheater, false);
 
         mPager = (ViewPager) findViewById(R.id.view_pager);
         mPagerAdapter = new QuizPagerAdapter(getSupportFragmentManager());
@@ -62,6 +71,14 @@ public class QuizPager extends FragmentActivity {
         return mCheatTokens;
     }
 
+    public int getScore(){
+        return mScore;
+    }
+
+    public void increaseScore(){
+        mScore ++;
+    }
+
     public void reduceCheatTokens(){
         mCheatTokens --;
     }
@@ -72,5 +89,32 @@ public class QuizPager extends FragmentActivity {
 
     public void increaseAnsweredQuestions(){
         mAnsweredQuestions ++;
+    }
+
+    public void setStatus(boolean status, int index)
+    {
+        mIsCheater[index] = status;
+    }
+
+    public void setQuestionStatus(boolean status, int index)
+    {
+        mLockedQuestions[index] = status;
+    }
+
+    public boolean getQuestionStatus(int index)
+    {
+        return mLockedQuestions[index];
+    }
+
+    public boolean getStatus(int index)
+    {
+        return mIsCheater[index];
+    }
+
+    private boolean[] initArray(boolean[] arrayToInit, boolean initValue) {
+        for(int i = 0; i < arrayToInit.length; i++) {
+            arrayToInit[i] = initValue;
+        }
+        return arrayToInit;
     }
 }

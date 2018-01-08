@@ -41,12 +41,6 @@ public class QuizFragment extends Fragment {
 
     public int mCurrentIndex;
     private int mQuestionId;
-    public int mScore = 0;
-    public int mCheatTokens = 3;
-    public int mAnsweredQuestions;
-
-    public boolean[] mLockedQuestions;
-    public boolean[] mIsCheater;
 
     public static QuizFragment newInstance(int id, int position)
     {
@@ -63,16 +57,7 @@ public class QuizFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (savedInstanceState != null) {
-            mScore = savedInstanceState.getInt("score");
-            mAnsweredQuestions = savedInstanceState.getInt("answeredQuestions");
-            mCheatTokens = savedInstanceState.getInt(TOKEN);
-            mIsCheater = savedInstanceState.getBooleanArray("isCheater");
-            mLockedQuestions = savedInstanceState.getBooleanArray("lockedQuestions");
         } else {
-            mIsCheater = new boolean[mQuestionsBank.size()];
-            mLockedQuestions = new boolean[mQuestionsBank.size()];
-            mIsCheater = initArray(mIsCheater, false);
-            mLockedQuestions = initArray(mLockedQuestions, false);
         }
         mQuestionId = (int) getArguments().getSerializable(ARG_QUESTION_ID);
         mCurrentIndex = (int) getArguments().getSerializable(ARG_QUESTION_POSITION);
@@ -91,12 +76,12 @@ public class QuizFragment extends Fragment {
             public void onClick(View view) {
 
                 boolean currentAnswer = mQuestionsBank.getQuestion(mCurrentIndex).isAnswerTrue();
-                Intent intent = CheatActivity.newIntent(getActivity(), currentAnswer, mIsCheater[mCurrentIndex]);
+                Intent intent = CheatActivity.newIntent(getActivity(), currentAnswer, ((QuizPager)getActivity()).getStatus(mCurrentIndex));
                 startActivityForResult(intent, CHEAT_REQEST_CODE);
             }
         });
 
-        if(mCheatTokens <= 0)
+        if(((QuizPager)getActivity()).getCheatTokens() <= 0)
         {
 
             mTokensTextView = (TextView) v.findViewById(R.id.cheat_used_all_tokens);
@@ -184,9 +169,9 @@ public class QuizFragment extends Fragment {
                 boolean answerWasShown = CheatActivity.wasAnswerShown(data);
                 if (answerWasShown) {
 
-                    if(!mIsCheater[mCurrentIndex]) {
+                    if(!((QuizPager)getActivity()).getStatus(mCurrentIndex)) {
                         Toast.makeText(getActivity(), R.string.message_for_cheaters, Toast.LENGTH_LONG).show();
-                        mIsCheater[mCurrentIndex] = true;
+                        ((QuizPager)getActivity()).setStatus(true, mCurrentIndex);
                         ((QuizPager)getActivity()).reduceCheatTokens();
                         if(((QuizPager)getActivity()).getCheatTokens() <= 0)
                         {
@@ -204,30 +189,12 @@ public class QuizFragment extends Fragment {
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
 
-        savedInstanceState.putInt("answeredQuestions", mScore);
-        savedInstanceState.putInt("score", mAnsweredQuestions);
         savedInstanceState.putInt(KEY_INDEX, mCurrentIndex);
-        savedInstanceState.putInt(TOKEN, mCheatTokens);
-        savedInstanceState.putBooleanArray("isCheater", mIsCheater);
-        savedInstanceState.putBooleanArray("lockedQuestions", mLockedQuestions);
     }
-
-//    public void onRestoreInstanceState(Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//
-//        mScore = savedInstanceState.getInt("score");
-//        mAnsweredQuestions = savedInstanceState.getInt("answeredQuestions");
-//        mCurrentIndex = savedInstanceState.getInt(KEY_INDEX);
-//        mCheatTokens = savedInstanceState.getInt(TOKEN);
-//        mIsCheater = savedInstanceState.getBooleanArray("isCheater");
-//        mLockedQuestions = savedInstanceState.getBooleanArray("lockedQuestions");
-//
-//
-//    }
 
     private void checkScore() {
         if (((QuizPager)getActivity()).getAnsweredQuestions() >= mQuestionsBank.size()) {
-            Intent intent = GameResultActivity.newIntent(getActivity(), mQuestionsBank.size(), mScore, mCheatTokens);
+            Intent intent = GameResultActivity.newIntent(getActivity(), mQuestionsBank.size(), ((QuizPager)getActivity()).getScore(), ((QuizPager)getActivity()).getCheatTokens());
             startActivity(intent);
             //String tText =  getString(R.string.answered_questions)+" "+mScore;
             //Toast toast = Toast.makeText(getActivity(), (tText), Toast.LENGTH_SHORT);
@@ -237,7 +204,7 @@ public class QuizFragment extends Fragment {
     }
 
     private void updateQuestion() {
-        if (!(mLockedQuestions[mCurrentIndex] == true)) {
+        if (!(((QuizPager)getActivity()).getQuestionStatus(mCurrentIndex) == true)) {
             mTrueButton.setVisibility(View.VISIBLE);
             mFalseButton.setVisibility(View.VISIBLE);
             mAnsweredTextView.setText("");
@@ -255,14 +222,14 @@ public class QuizFragment extends Fragment {
     private void checkAnswer(boolean userPressedTrue) {
         boolean answerIsTrue = mQuestionsBank.getQuestion(mCurrentIndex).isAnswerTrue();
 
-        mLockedQuestions[mCurrentIndex] = true;
+        ((QuizPager)getActivity()).setQuestionStatus(true, mCurrentIndex);
         mTrueButton.setVisibility(View.GONE);
         mFalseButton.setVisibility(View.GONE);
         int toastMessageId = 0;
 
         if (userPressedTrue == answerIsTrue) {
             toastMessageId = R.string.correct_toast;
-            mScore += 1;
+            ((QuizPager)getActivity()).increaseScore();
         } else {
             toastMessageId = R.string.incorrect_toast;
         }
@@ -273,12 +240,5 @@ public class QuizFragment extends Fragment {
         toast.show();
 
         checkScore();
-    }
-
-    private boolean[] initArray(boolean[] arrayToInit, boolean initValue) {
-        for(int i = 0; i < arrayToInit.length; i++) {
-            arrayToInit[i] = initValue;
-        }
-        return arrayToInit;
     }
 }

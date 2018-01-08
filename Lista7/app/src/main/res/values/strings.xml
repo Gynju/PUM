@@ -30,6 +30,8 @@
 
     <string name="new_question">New Question</string>
     <string name="quit">Quit</string>
+    <string name="back">Back</string>
+    <string name="share">Share results</string>
     <string name="subtitle_format">%1d questions</string>
 
     <string name="questions_quantity_label">Ilość zadanych pytań: </string>
